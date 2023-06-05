@@ -30,8 +30,10 @@ router.post("/add", upload, async (req, res) => {
       origin_description: req.body.origin_description,
       superpowers: req.body.superpowers,
       catch_phrase: req.body.catch_phrase,
-      image: req.file.filename,
     });
+    if (req.file) {
+      hero.image = req.file.filename;
+    }
     await hero.save();
     req.session.message = {
       type: "success",
@@ -86,7 +88,7 @@ router.get("/edit/:id", async (req, res) => {
 router.post("/update/:id", upload, async (req, res) => {
   try {
     const id = req.params.id;
-    let new_image = "";
+    let new_image = req.body.old_image;
     if (req.file) {
       new_image = req.file.filename;
       try {
@@ -94,8 +96,6 @@ router.post("/update/:id", upload, async (req, res) => {
       } catch (err) {
         console.log(err);
       }
-    } else {
-      new_image = req.body.old_image;
     }
 
     await Heroes.findByIdAndUpdate(id, {

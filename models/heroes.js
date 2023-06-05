@@ -2,31 +2,31 @@ const mongoose = require("mongoose");
 const heroesSchema = new mongoose.Schema({
     nickname: {
         type: String,
-        required: true,
+        required: false,
     },
     real_name: {
         type: String,
-        required: true,
+        required: false,
     },
     origin_description: {
         type: String,
-        required: true,
+        required: false,
     },
     superpowers: {
         type: String,
-        required: true,
+        required: false,
     },
     catch_phrase: {
         type: String,
-        required: true,
+        required: false,
     },
     image: {
         type: String,
-        required: true,
+        required: false,
     },
     created: {
         type: Date,
-        required: true,
+        required: false,
         default: Date.now,
     },
 });
